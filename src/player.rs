@@ -4,7 +4,12 @@ pub fn handle_play_card(
     current_hand: &mut Vec<String>,
     flipped_card: &String,
     card_sequence: &[&str; 10],
+    current_game_state: &str
 ) -> String {
+    if current_hand.len() > 3 {
+        panic!("Mão inválida")
+    }
+
     // Determine the manilha
     let flipped_index = card_sequence
         .iter()
@@ -43,7 +48,7 @@ pub fn handle_play_card(
         _ => {
             println!("Escolha inválida, tente novamente");
 
-            handle_play_card(current_hand, flipped_card, card_sequence)
+            handle_play_card(current_hand, flipped_card, card_sequence, current_game_state)
         }
     }
 }
