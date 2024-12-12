@@ -19,3 +19,7 @@ pub fn get_shuffled_cards() -> Vec<String> {
 
     return truco_cards;
 }
+
+pub fn get_highest_card(cards: &Vec<String>, flipped_card: &str) {
+    
+}
