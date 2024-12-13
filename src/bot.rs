@@ -3,6 +3,10 @@ pub fn play_bot_card(
     card_sequence: &[&str; 10],
     flipped_card: &String,
 ) -> String {
+    if bot_hand.len() > 3 {
+        panic!()
+    }
+
     // Determine the manilha (card after the flipped card in the sequence)
     let flipped_index = card_sequence
         .iter()
