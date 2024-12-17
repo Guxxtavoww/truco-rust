@@ -30,15 +30,19 @@ fn suit_priority(suit: &str) -> usize {
     }
 }
 
-    // Função para calcular a pontuação de cada carta
+// Função para calcular a pontuação de cada carta
 fn get_card_score(card: &String, manilha: &str) -> (bool, usize, usize) {
     let is_manilha = card.starts_with(manilha);
+
+    // Posição da carta na sequência padrão
     let sequence_score = DEFAULT_SEQUENCE
         .iter()
         .position(|&seq_card| card.starts_with(seq_card))
         .unwrap_or(0);
 
-    let suit_score = suit_priority(&card[card.len() - 2..]); // Últimos caracteres representam o naipe
+    // Pegando o último caractere (naipe) de forma segura
+    let suit = card.chars().last().unwrap_or(' ');
+    let suit_score = suit_priority(&suit.to_string());
 
     (is_manilha, sequence_score, suit_score)
 }
