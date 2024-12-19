@@ -1,6 +1,6 @@
 use crate::{
     bot::play_bot_card,
-    cards::{get_highest_card, DEFAULT_SEQUENCE},
+    cards::get_highest_card,
     player::handle_play_card,
 };
 
@@ -25,13 +25,12 @@ pub fn best_two_out_of_three(
     for round in 1..=3 {
         println!("--- Rodada {} ---", round);
 
-        let bot_card = play_bot_card(bot_hand, &DEFAULT_SEQUENCE, flipped_card);
+        let bot_card = play_bot_card(bot_hand, flipped_card);
 
         let player_played_card = handle_play_card(
             player_hand,
             flipped_card,
-            &DEFAULT_SEQUENCE,
-            current_game_state,
+            &mut current_game_state.to_string(),
         );
 
         let current_hand = vec![bot_card.clone(), player_played_card.clone()];

@@ -1,9 +1,10 @@
 use std::io::stdin;
 
+use crate::cards::DEFAULT_SEQUENCE;
+
 pub fn handle_play_card(
     current_hand: &mut Vec<String>,
     flipped_card: &String,
-    card_sequence: &[&str; 10],
     current_game_state: &str
 ) -> String {
     if current_hand.len() > 3 {
@@ -11,14 +12,14 @@ pub fn handle_play_card(
     }
 
     // Determine the manilha
-    let flipped_index = card_sequence
+    let flipped_index = DEFAULT_SEQUENCE
         .iter()
         .position(|&card| flipped_card.starts_with(card))
         .expect("Flipped card must be in the sequence");
 
     // Get the next card in the sequence (with wrap-around)
-    let manilha_index = (flipped_index + 1) % card_sequence.len();
-    let manilha = card_sequence[manilha_index];
+    let manilha_index = (flipped_index + 1) % DEFAULT_SEQUENCE.len();
+    let manilha = DEFAULT_SEQUENCE[manilha_index];
 
     let mut index: i32 = 0;
 
@@ -41,14 +42,14 @@ pub fn handle_play_card(
         Ok(choice) if choice > 0 && choice <= current_hand.len() => {
             let chosen_card = current_hand.remove(choice - 1);
 
-            println!("Voçê jogou: {}", chosen_card);
+            println!("Você jogou: {}", chosen_card);
 
             return chosen_card;
         }
         _ => {
             println!("Escolha inválida, tente novamente");
 
-            handle_play_card(current_hand, flipped_card, card_sequence, current_game_state)
+            handle_play_card(current_hand, flipped_card, current_game_state)
         }
     }
 }

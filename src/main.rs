@@ -2,6 +2,7 @@ mod bot;
 mod cards;
 mod player;
 mod round;
+mod truco;
 
 use cards::get_shuffled_cards;
 use round::{best_two_out_of_three, MatchResult};
@@ -53,7 +54,7 @@ fn main() {
                 player_score += points_to_gain;
             }
             MatchResult::Tie => {
-                panic!("Deu merda")
+                continue;
             }
         }
     }
